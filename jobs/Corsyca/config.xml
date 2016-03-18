@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset plugin="maven-plugin@2.7.1">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.filesystem_scm.FSSCM" plugin="filesystem_scm@1.20">
+    <path>C:\data\SCM\Products\DEV_MAIN_2013_12\be.axa.corp.fleet.mgmt</path>
+    <clearWorkspace>false</clearWorkspace>
+    <copyHidden>false</copyHidden>
+    <filterEnabled>false</filterEnabled>
+    <includeFilter>false</includeFilter>
+    <filters/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <rootModule>
+    <groupId>be.axa.corp.fleet.mgmt</groupId>
+    <artifactId>parent</artifactId>
+  </rootModule>
+  <goals>clean install -P ufems</goals>
+  <mavenOpts>-Dmaven.javadoc.skip=true</mavenOpts>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <ignoreUpstremChanges>true</ignoreUpstremChanges>
+  <archivingDisabled>true</archivingDisabled>
+  <siteArchivingDisabled>false</siteArchivingDisabled>
+  <fingerprintingDisabled>false</fingerprintingDisabled>
+  <resolveDependencies>false</resolveDependencies>
+  <processPlugins>false</processPlugins>
+  <mavenValidationLevel>-1</mavenValidationLevel>
+  <runHeadless>false</runHeadless>
+  <disableTriggerDownstreamProjects>false</disableTriggerDownstreamProjects>
+  <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+  <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+  <reporters/>
+  <publishers>
+    <org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher plugin="discard-old-build@1.04">
+      <daysToKeep>-1</daysToKeep>
+      <numToKeep>10</numToKeep>
+      <resultsToKeep>
+        <hudson.model.Result>
+          <name>SUCCESS</name>
+          <ordinal>0</ordinal>
+          <color>BLUE</color>
+          <completeBuild>true</completeBuild>
+        </hudson.model.Result>
+      </resultsToKeep>
+      <minLogFileSize>-1</minLogFileSize>
+      <maxLogFileSize>-1</maxLogFileSize>
+      <intervalDaysToKeep>-1</intervalDaysToKeep>
+      <intervalNumToKeep>-1</intervalNumToKeep>
+      <resultsToKeepOld/>
+    </org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher>
+    <hudson.plugins.deploy.DeployPublisher plugin="deploy@1.9">
+      <adapter class="hudson.plugins.deploy.jboss.JBoss4xAdapter">
+        <userName></userName>
+        <passwordScrambled></passwordScrambled>
+        <url>http://localhost:8080</url>
+      </adapter>
+      <contextPath></contextPath>
+      <war>**/*.ear</war>
+      <onFailure>false</onFailure>
+    </hudson.plugins.deploy.DeployPublisher>
+  </publishers>
+  <buildWrappers/>
+  <prebuilders/>
+  <postbuilders/>
+  <runPostStepsIfResult>
+    <name>FAILURE</name>
+    <ordinal>2</ordinal>
+    <color>RED</color>
+    <completeBuild>true</completeBuild>
+  </runPostStepsIfResult>
+</maven2-moduleset>
